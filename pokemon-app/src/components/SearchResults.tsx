@@ -9,7 +9,9 @@ class SearchResults extends Component<SearchResultsProps> {
     return (
       <div>
         <h2>Search Results:</h2>
-        <ul>{this.props.searchString}</ul>
+        <div className="search_results">
+          <ul>{this.props.searchString}</ul>
+        </div>
       </div>
     );
   }
