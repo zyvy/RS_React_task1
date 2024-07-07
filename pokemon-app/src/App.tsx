@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchComponent from './components/SearchComponent';
 import SearchResults from './components/SearchResults';
+import ErrorBoundary from './components/ErrorBoundary';
 
 interface AppState {
   searchString: string;
@@ -21,6 +22,7 @@ class App extends Component<object, AppState> {
 
   render() {
     return (
+      <ErrorBoundary>
       <div className="wrapper">
         <header>
           <img className="logo" src={logo} alt="logo" />
@@ -31,6 +33,7 @@ class App extends Component<object, AppState> {
           <SearchResults searchString={this.state.searchString} />
         </main>
       </div>
+      </ErrorBoundary>
     );
   }
 }
