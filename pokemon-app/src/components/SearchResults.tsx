@@ -1,23 +1,22 @@
 import { Component } from 'react';
 import { PokemonClient } from 'pokenode-ts';
-import "./SearchResults.css"
-
+import './SearchResults.css';
 
 interface SearchResultsProps {
   searchString: string;
 }
 
 class SearchResults extends Component<SearchResultsProps> {
-  data: string[] = []
-  async getPokemons(searchWord: string){
+  data: string[] = [];
+  async getPokemons(searchWord: string) {
     const api = new PokemonClient();
-  try {
-    const pokemonData = await api.getPokemonByName(searchWord);
-    console.log(pokemonData); 
-    return pokemonData;
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+      const pokemonData = await api.getPokemonByName(searchWord);
+      console.log(pokemonData);
+      return pokemonData;
+    } catch (error) {
+      console.error(error);
+    }
   }
   constructor(props: SearchResultsProps) {
     super(props);

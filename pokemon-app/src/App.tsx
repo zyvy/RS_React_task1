@@ -1,5 +1,5 @@
 import logo from './assets/logo.jpg';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import './App.css';
 import SearchComponent from './components/SearchComponent';
 import SearchResults from './components/SearchResults';
@@ -23,16 +23,16 @@ class App extends Component<object, AppState> {
   render() {
     return (
       <ErrorBoundary>
-      <div className="wrapper">
-        <header>
-          <img className="logo" src={logo} alt="logo" />
-          <h1>Search for pokemon</h1>
-        </header>
-        <main>
-          <SearchComponent onSearch={this.handleSearch} />
-          <SearchResults searchString={this.state.searchString} />
-        </main>
-      </div>
+        <div className="wrapper">
+          <header>
+            <img className="logo" src={logo} alt="logo" />
+            <h1>Search for pokemon</h1>
+          </header>
+          <main>
+            <SearchComponent onSearch={this.handleSearch} />
+            <SearchResults searchString={this.state.searchString} />
+          </main>
+        </div>
       </ErrorBoundary>
     );
   }
