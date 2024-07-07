@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/husky.sh"
 
-cd pokemon-app && npm run format && npm run lint
+cd pokemon-app && npm run format:fix && npm run lint

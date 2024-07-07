@@ -8,8 +8,8 @@ interface AppState {
   searchString: string;
 }
 
-class App extends Component<{}, AppState> {
-  constructor(props: {}) {
+class App extends Component<object, AppState> {
+  constructor(props: object) {
     super(props);
     this.state = {
       searchString: '',
@@ -28,7 +28,7 @@ class App extends Component<{}, AppState> {
         </header>
         <main>
           <SearchComponent onSearch={this.handleSearch} />
-          <SearchResults searchString={this.state.searchString}/>
+          <SearchResults searchString={this.state.searchString} />
         </main>
       </div>
     );

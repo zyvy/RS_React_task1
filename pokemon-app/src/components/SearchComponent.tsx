@@ -1,5 +1,5 @@
 import { Component, ChangeEvent, FormEvent } from 'react';
-import "./SearchComponent.css"
+import './SearchComponent.css';
 
 interface SearchInputProps {
   onSearch: (searchTerm: string) => void;
