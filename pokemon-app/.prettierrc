@@ -8,5 +8,6 @@
   "bracketSpacing": true,
   "embeddedLanguageFormatting": "auto",
   "printWidth": 80,
-  "useTabs": false
+  "useTabs": false,
+  "endOfLine": "auto"
 }
