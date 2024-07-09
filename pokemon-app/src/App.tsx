@@ -4,6 +4,7 @@ import './App.css';
 import SearchComponent from './components/SearchComponent';
 import SearchResults from './components/SearchResults';
 import ErrorBoundary from './components/ErrorBoundary';
+import ErrorButton from './components/ErrorBtn';
 
 interface AppState {
   searchString: string;
@@ -28,6 +29,7 @@ class App extends Component<object, AppState> {
             <img className="logo" src={logo} alt="logo" />
             <h1>Search for pokemon</h1>
           </header>
+          <ErrorButton />
           <main>
             <SearchComponent onSearch={this.handleSearch} />
             <SearchResults searchString={this.state.searchString} />
