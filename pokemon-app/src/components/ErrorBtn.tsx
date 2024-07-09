@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class ErrorButton extends Component {
   handleClick = () => {
-    throw new Error('This is a deliberate error.');
+    throw new Error('This is error sample.');
   };
 
   render() {

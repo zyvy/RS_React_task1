@@ -27,7 +27,7 @@ class App extends Component<object, AppState> {
         <div className="wrapper">
           <header>
             <img className="logo" src={logo} alt="logo" />
-            <h1>Search for pokemon</h1>
+            <h1>Search for anime title</h1>
           </header>
           <ErrorButton />
           <main>
