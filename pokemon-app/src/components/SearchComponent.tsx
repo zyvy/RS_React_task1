@@ -1,49 +1,40 @@
-import { Component, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import './SearchComponent.css';
 
 interface SearchInputProps {
   onSearch: (searchTerm: string) => void;
 }
 
-interface SearchInputState {
-  searchTerm: string;
-}
+function SearchComponent({ onSearch }: SearchInputProps) {
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-class SearchComponent extends Component<SearchInputProps, SearchInputState> {
-  constructor(props: SearchInputProps) {
-    super(props);
-    this.state = {
-      searchTerm: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const savedSearchTerm = localStorage.getItem('searchTerm');
     if (savedSearchTerm) {
-      this.setState({ searchTerm: savedSearchTerm });
+      setSearchTerm(savedSearchTerm);
     }
-  }
-  handleSearch = (event: FormEvent<HTMLFormElement>) => {
+  }, []);
+
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.setItem('searchTerm', this.state.searchTerm.trim());
-    this.props.onSearch(this.state.searchTerm.trim());
-  };
-  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchTerm: event.target.value });
+    localStorage.setItem('searchTerm', searchTerm.trim());
+    onSearch(searchTerm.trim());
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSearch}>
-        <input
-          type="text"
-          value={this.state.searchTerm}
-          onChange={this.handleChange}
-        />
-        <button type="submit">Search</button>
-      </form>
-    );
-  }
-}
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSearch}>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+      />
+      <button type="submit">Search</button>
+    </form>
+  );
+};
 
 export default SearchComponent;
