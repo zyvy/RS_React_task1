@@ -16,8 +16,6 @@ interface Anime {
   image_url: string;
 }
 
-
-
 function SearchResults({ searchString }: SearchResultsProps) {
   const [animes, setAnimes] = useState<Anime[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

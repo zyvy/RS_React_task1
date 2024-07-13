@@ -18,10 +18,9 @@ const useSavedSearchTerm = () => {
   return { searchTerm, setSearchTerm };
 };
 
-
 function SearchComponent({ onSearch }: SearchInputProps) {
-  const {searchTerm, setSearchTerm} = useSavedSearchTerm();
- // onSearch(searchTerm);
+  const { searchTerm, setSearchTerm } = useSavedSearchTerm();
+  // onSearch(searchTerm);
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
