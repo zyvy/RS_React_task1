@@ -1,91 +1,39 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import './SearchResults.css';
-
+import CardList from './CardList';
+import { searchAnime } from './services/ApiService';
+import { AnimeData } from './types/types';
 interface SearchResultsProps {
   searchString: string;
 }
-interface Imageurl {
-  jpg: {
-    image_url: string;
-  };
-}
 
-interface Anime {
-  mal_id: number;
-  images: Imageurl;
-  title: string;
-  image_url: string;
-}
+export function SearchResults({ searchString }: SearchResultsProps) {
+  const [animes, setAnimes] = useState<AnimeData[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-interface SearchResultsState {
-  animes: Anime[];
-  loading: boolean;
-  error: string | null;
-}
-
-class SearchResults extends Component<SearchResultsProps, SearchResultsState> {
-  constructor(props: SearchResultsProps) {
-    super(props);
-    this.state = {
-      animes: [],
-      loading: false,
-      error: null,
+  useEffect(() => {
+    const fetchAnime = async () => {
+      setLoading(true);
+      const data = await searchAnime(searchString);
+      setAnimes(data.data);
     };
-  }
-
-  componentDidMount() {
-    this.fetchAnimeData();
-  }
-
-  componentDidUpdate(prevProps: SearchResultsProps) {
-    if (prevProps.searchString !== this.props.searchString) {
-      this.fetchAnimeData();
-    }
-  }
-
-  async fetchAnimeData() {
-    const { searchString } = this.props;
-    const url = `https://api.jikan.moe/v4/anime?q=${searchString}`;
-
-    this.setState({ loading: true, error: null });
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      this.setState({
-        animes: data.data,
-        loading: false,
-      });
-    } catch (error) {
-      console.error(error);
-      this.setState({ error: 'Failed to fetch', loading: false });
-    }
-  }
-
-  render() {
-    const { searchString } = this.props;
-    const { animes, loading, error } = this.state;
-
-    return (
-      <div>
-        <h2>Search Results:</h2>
-        <div className="search_results">
-          <h2>{searchString}</h2>
-          {loading && <p>Loading...</p>}
-          {error && <p className="error">{error}</p>}
-          {animes.length > 0 && (
-            <div className="anime-list">
-              {animes.map((anime) => (
-                <div key={anime.mal_id} className="anime-card">
-                  <h3>{anime.title}</h3>
-                  <img src={anime.images.jpg.image_url} alt={anime.title} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+    fetchAnime();
+    setLoading(false);
+  }, [searchString]);
+  return (
+    <div>
+      <h2>Search Results:</h2>
+      <div className="search_results">
+        <h2>{searchString}</h2>
+        {loading && <p>Loading...</p>}
+        {animes.length > 0 && (
+          <div className="anime-list">
+            {animes.map((anime) => (
+              <CardList key={anime.mal_id} {...anime} />
+            ))}
+          </div>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 }
-export default SearchResults;
