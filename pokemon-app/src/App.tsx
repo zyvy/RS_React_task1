@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import SearchComponent from './components/SearchComponent';
-import SearchResults from './components/SearchResults';
+import { SearchResults } from './components/SearchResults';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 
